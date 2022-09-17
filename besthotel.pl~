@@ -450,74 +450,52 @@
 % ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::.
 % :::::::::::::::::::::: MOTOR DE INFERENCIA ::::::::::::::::::::::.
 % ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::.
-% ****************************************************.
-% ********************* BEGIN *********************.
-    begin:- write('¡Bienvenido al selector de vacaciones 2022!'),nl,
-            write('Seleccione una opcion:'),nl,
-            write(''),nl,
-            write('1. sistema_experto'),nl,
-            write('2. reportes'),nl,
-            read(MENU_OP),nl,
-            selection(MENU_OP),
-            nl.
 
-    selection(OP):- (
-        OP == 1 -> exp_sys_menu;
-        OP == 2 -> reports_menu;
-        write('Opcion no valida'),nl
-    ).
+% ********************* BEGIN *********************.
+begin:- write('Bienvenido al selector de vacaciones 2022'),nl,
+        write('Seleccione una opcion:'),nl,
+        write(''),nl,
+        write('1. sistema_experto'),nl,
+        write('2. reportes'),nl,
+        read(MENU_OP),nl,
+        analyze_op(MENU_OP),
+        nl.
+
+analyze_op(OP):- (
+    OP==1->exp_sys_menu;
+    OP==2->reports_menu;
+    write('Opcion no valida'),nl
+).
 % ****************************************************.
 % *************** MENU SISTEMA EXPERTO ***************.
-    exp_sys_menu:- nl,
-        write('Por favor elija su situacion:'),nl,
-        write('1. por_presupuesto'),nl,
-        write('2. por_idioma'),nl,
-        write('3. por_calidad'),nl,
-        write('4. por_clima'),nl,
-        read(RUTA_OP),nl,
-        analyze_route_op(RUTA_OP),
-        nl.
+exp_sys_menu:- nl,
+    write('Por favor elija su situacion:'),nl,
+    write('1. por_presupuesto'),nl,
+    write('2. por_idioma'),nl,
+    write('3. por_calidad'),nl,
+    write('4. por_clima'),nl,''
+    read(RUTA_OP),nl,
+    analyze_route_op(RUTA_OP),
+    nl.
 
-    analyze_op(OP):- (
-        OP == 1 -> r_presupuesto;
-        OP == 2 -> r_idioma;
-        OP == 3 -> r_calidad;
-        OP == 4 -> r_clima;
-        write('Opcion no valida'),nl
-    ).
-% ||||||||||||||| Ruta 1 - Presupuesto |||||||||||||||
-%   Presupuesto > 5000 => hoteles >= 4 estrellas -> clima -> distancia
-%   Presupuesto < 5000 => hoteles < 4 estrellas -> max por hab. -> clima -> distancia
-%   Distancia maxima
-%   Maximo por habitacion
-    r_presupuesto:- nl,
-        write('Ingrese su presupuesto maximo:'),nl,
-        read(MAX_PRESUPUESTO),nl,
-        write('¿Realizara el viaje en su vehiculo? \n1. Si. \n2. No.'),nl,
-        read(VEHICULO),nl,
-        write('Ingrese el clima deseado: \n1. Tropical \n2. Calor \n3. Frio \n4. Templado'),nl,
-        read(ESTRELLAS),nl,
-        write('Tipo de habitacion deseada: \n1. Simple \n2. Doble'),nl,
-        read(T_HABITACION),nl,
-        write('¿Cuantos dias se estara hospedando?'),nl,
-        read(D_ESTADIA),nl,
-        write('¿Cuantos tiempos de comida desea? \n0. \n1. \n2. \n3.'),nl,
-        read(T_COMIDA),nl,
-        analyze_budget_r(VEHICULO, T_HABITACION, ESTRELLAS, T_HABITACION, D_ESTADIA, T_COMIDA, MAX_PRESUPUESTO),
-        nl.
-    analyze_budget_r(VEHICULO, T_HABITACION, ESTRELLAS, T_HABITACION, D_ESTADIA, T_COMIDA, MAX_PRESUPUESTO):- (
-    ).
+analyze_op(OP):- (
+    OP == 1 -> r_presupuesto;
+    OP == 2 -> r_idioma;
+    OP == 3 -> r_calidad;
+    OP == 4 -> r_clima;
+    write('Opcion no valida'),nl
+).
 % ****************************************************.
 % *************** MENU REPORTES ***************.
-    reports_menu:- nl,
-        write('Eliga que reporte le gustaria visualizar:'),nl,
-        write('1. reporte_1'),nl,
-        write('2. reporte_2'),nl,
-        write('3. reporte_3'),nl,
-        write('4. reporte_4'),nl,
-        write('5. reporte_5'),nl,
-        write('6. reporte_6'),nl,
-        write('7. reporte_7'),nl,
-        read(REPORTES_OP),nl,
-        analyze_rep_op(REPORTES_OP),
-        nl.
+reports_menu:- nl,
+    write('Eliga que reporte le gustaria visualizar:'),nl,
+    write('1. reporte_1'),nl,
+    write('2. reporte_2'),nl,
+    write('3. reporte_3'),nl,
+    write('4. reporte_4'),nl,
+    write('5. reporte_5'),nl,
+    write('6. reporte_6'),nl,
+    write('7. reporte_7'),nl,
+    read(REPORTES_OP),nl,
+    % analyze_rep_op(REPORTES_OP),
+    nl.
