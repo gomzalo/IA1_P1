@@ -5,28 +5,28 @@
 % --------------------------------------------.
 % ----------- Hechos departamento -----------.
 % --------------------------------------------.
-    departamento(d1, peten, 8, espanol, tropical).
-    departamento(d2, izabal, 5, espanol, calor).
-    departamento(d3, alta_verapaz, 6, espanol, frio).
-    departamento(d4, quiche, 5, katchikel, frio).
-    departamento(d5, huehuetenango, 7, espanol, frio).
-    departamento(d6, escuintla, 2, espanol, calor).
-    departamento(d7, san_marcos,3, ingles, calor).
-    departamento(d8, jutiapa, 4, katchikel, calor).
-    departamento(d9, baja_verapaz, 5, ingles, templado).
-    departamento(d10, santa_rosa, 4, ingles, calor).
-    departamento(d11, zacapa, 3, ingles, calor).
-    departamento(d12, suchitepequez, 5, espanol, templado).
-    departamento(d13, chiquimula, 4, katchikel, calor).
-    departamento(d14, guatemala, 0, ingles, templado).
-    departamento(d15, jalapa, 4, ingles, calor).
-    departamento(d16, chimaltenango, 3, katchikel, calor).
-    departamento(d17, quetzaltenango, 3, ingles, frio).
-    departamento(d18, el_progreso, 4, katchikel, calor).
-    departamento(d19, retalhuleu, 4, ingles, calor).
-    departamento(d20, solola, 6, ketchi, frio).
-    departamento(d21, totonicapan, 5, ingles, templado).
-    departamento(d22, sacatepequez, 2, espanol, templado).
+    departamento(d1, peten, 8, espanol, tropical, 600).
+    departamento(d2, izabal, 5, espanol, calor, 200).
+    departamento(d3, alta_verapaz, 6, espanol, frio, 300).
+    departamento(d4, quiche, 5, katchikel, frio, 400).
+    departamento(d5, huehuetenango, 7, espanol, frio, 500).
+    departamento(d6, escuintla, 2, espanol, calor, 50).
+    departamento(d7, san_marcos,3, ingles, calor, 400).
+    departamento(d8, jutiapa, 4, katchikel, calor, 100).
+    departamento(d9, baja_verapaz, 5, ingles, templado, 200).
+    departamento(d10, santa_rosa, 4, ingles, calor, 100).
+    departamento(d11, zacapa, 3, ingles, calor, 100).
+    departamento(d12, suchitepequez, 5, espanol, templado, 50).
+    departamento(d13, chiquimula, 4, katchikel, calor, 300).
+    departamento(d14, guatemala, 0, ingles, templado, 10).
+    departamento(d15, jalapa, 4, ingles, calor, 100).
+    departamento(d16, chimaltenango, 3, katchikel, calor, 100).
+    departamento(d17, quetzaltenango, 3, ingles, frio, 300).
+    departamento(d18, el_progreso, 4, katchikel, calor, 150).
+    departamento(d19, retalhuleu, 4, ingles, calor, 200).
+    departamento(d20, solola, 6, ketchi, frio, 200).
+    departamento(d21, totonicapan, 5, ingles, templado, 200).
+    departamento(d22, sacatepequez, 2, espanol, templado, 100).
 
 % --------------------------------------------.
 % ----------- Hechos hotel -----------.
@@ -452,6 +452,7 @@
 % ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::.
 % ****************************************************.
 % ********************* BEGIN *********************.
+% ****************************************************.
     begin:- write('¡Bienvenido al selector de vacaciones 2022!'),nl,
             write('Seleccione una opcion:'),nl,
             write(''),nl,
@@ -468,56 +469,217 @@
     ).
 % ****************************************************.
 % *************** MENU SISTEMA EXPERTO ***************.
+% ****************************************************.
     exp_sys_menu:- nl,
+    (
         write('Por favor elija su situacion:'),nl,
         write('1. por_presupuesto'),nl,
         write('2. por_idioma'),nl,
         write('3. por_calidad'),nl,
         write('4. por_clima'),nl,
         read(RUTA_OP),nl,
-        analyze_route_op(RUTA_OP),
-        nl.
+        analyze_route_op(RUTA_OP),nl
+    ).
 
-    analyze_op(OP):- (
+    analyze_route_op(OP):-
+    (
         OP == 1 -> r_presupuesto;
         OP == 2 -> r_idioma;
         OP == 3 -> r_calidad;
         OP == 4 -> r_clima;
         write('Opcion no valida'),nl
     ).
-% ||||||||||||||| Ruta 1 - Presupuesto |||||||||||||||
-%   Presupuesto > 5000 => hoteles >= 4 estrellas -> clima -> distancia
-%   Presupuesto < 5000 => hoteles < 4 estrellas -> max por hab. -> clima -> distancia
-%   Distancia maxima
-%   Maximo por habitacion
+% ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+% |||||||||||||||||||||||||||||| Ruta 1 - Presupuesto ||||||||||||||||||||||||||||||
+% ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
     r_presupuesto:- nl,
+    (
         write('Ingrese su presupuesto maximo:'),nl,
-        read(MAX_PRESUPUESTO),nl,
-        write('¿Realizara el viaje en su vehiculo? \n1. Si. \n2. No.'),nl,
+        read(PRESUPUESTO),nl,
+        write('¿Realizara el viaje en su vehiculo?\ns/n'),nl,
         read(VEHICULO),nl,
-        write('Ingrese el clima deseado: \n1. Tropical \n2. Calor \n3. Frio \n4. Templado'),nl,
-        read(ESTRELLAS),nl,
-        write('Tipo de habitacion deseada: \n1. Simple \n2. Doble'),nl,
+        write('Ingrese el clima deseado:\ntropical\ncalor\nfrio\ntemplado'),nl,
+        read(CLIMA),nl,
+        write('Tipo de habitacion deseada:\nsimple\ndoble'),nl,
         read(T_HABITACION),nl,
         write('¿Cuantos dias se estara hospedando?'),nl,
-        read(D_ESTADIA),nl,
-        write('¿Cuantos tiempos de comida desea? \n0. \n1. \n2. \n3.'),nl,
+        read(DIAS),nl,
+        write('¿Cuantos tiempos de comida desea? \n0\n1\n2\n3'),nl,
         read(T_COMIDA),nl,
-        analyze_budget_r(VEHICULO, T_HABITACION, ESTRELLAS, T_HABITACION, D_ESTADIA, T_COMIDA, MAX_PRESUPUESTO),
-        nl.
-    analyze_budget_r(VEHICULO, T_HABITACION, ESTRELLAS, T_HABITACION, D_ESTADIA, T_COMIDA, MAX_PRESUPUESTO):- (
+        write('¿Cuantas personas se hospedaran?'),nl,
+        read(PERSONAS),nl,
+        write('Ingrese el numero minimo de estrellas que busca del hotel:'),nl,
+        read(ESTRELLAS),nl,
+        analyze_budget_r(PRESUPUESTO, VEHICULO, CLIMA, T_HABITACION, DIAS, T_COMIDA, PERSONAS, ESTRELLAS),nl
+    ).
+
+    analyze_budget_r(PRESUPUESTO, VEHICULO, CLIMA, T_HABITACION, DIAS, T_COMIDA, PERSONAS, ESTRELLAS):- nl,
+    (
+        departamento(ID_D,NOMBRE_D,_,_,CLIMA_D,PASAJE),CLIMA_D==CLIMA,
+        hotel(_,NOMBRE_H,_,ESTRELLAS_H,H_SIMPLE,H_DOBLE,COSTO_COMIDA,ID_D,DISTANCIA),ESTRELLAS_H==ESTRELLAS,
+        DIAS_PERSONA is DIAS*PERSONAS,
+        PRECIO_SIMPLE is H_SIMPLE*DIAS_PERSONA,
+        PRECIO_DOBLE is H_DOBLE*DIAS_PERSONA,
+        PRECIO_COMIDA is COSTO_COMIDA*T_COMIDA,
+        write('::::::::::::     RECOMENDACIONES     ::::::::::::'),nl,
+        (
+            (T_HABITACION=='simple',VEHICULO=='s')->simplev(NOMBRE_D,NOMBRE_H,ESTRELLAS,PRECIO_SIMPLE,DIAS,PRECIO_COMIDA,DISTANCIA,PRESUPUESTO);
+            (T_HABITACION=='doble',VEHICULO=='s')->doblev(NOMBRE_D,NOMBRE_H,ESTRELLAS,PRECIO_DOBLE,DIAS,PRECIO_COMIDA,DISTANCIA,PRESUPUESTO);
+            (T_HABITACION=='simple',VEHICULO=='n')->simplenv(NOMBRE_D,NOMBRE_H,ESTRELLAS,PRECIO_SIMPLE,DIAS,PRECIO_COMIDA,PASAJE,PRESUPUESTO);
+            (T_HABITACION=='doble',VEHICULO=='n')->doblenv(NOMBRE_D,NOMBRE_H,ESTRELLAS,PRECIO_DOBLE,DIAS,PRECIO_COMIDA,PASAJE,PRESUPUESTO)
+        ),fail
+    ).
+
+
+    doblev(ND,NH,E,PD,D,PC,DH,PRE):- nl,
+    (
+        GAS is 56/10,nl,
+        PRECIO is DH*GAS,nl,
+        COM is D*PC,nl,
+        write('-----------------------------------------------------'),nl,
+        TOTAL is PD+PRECIO+COM,TOTAL=<PRE,write(' Total: '),write(TOTAL),nl,
+        write('Hotel: '),write(NH),nl,
+        write('Departamento para viaje: '),write(ND),nl,
+        write('Estrellas del hotel: '),write(E),nl,
+        write('Habitacion doble total: Q.'),write(PD),nl,
+        write('Gasto por comida en los '),write(D),write(' dias '),COM is D*PC,write(' es Q.' ),write(COM),nl,
+        write('Gasto gasolina ida:'),write('Q.') ,write(PRECIO),nl,nl,fail
+    ).
+
+    simplev(ND,NH,E,PS,D,PC,DH,PRE):- nl,
+    (
+        GAS is 56/10,nl,
+        PRECIO is DH*GAS,nl,
+        COM is D*PC,nl,
+        write('-----------------------------------------------------'),nl,
+        TOTAL is PS+PRECIO+COM,TOTAL=<PRE,write(' Total: '),write(TOTAL),nl,
+        write('Hotel: '),write(NH),nl,
+        write('Departamento para viaje: '),write(ND),nl,
+        write('Estrellas del hotel: '),write(E),nl,
+        write('Habitacion simple total: Q.'),write(PS),nl,
+        write('Gasto por comida en los '),write(D),write(' dias '),write(' es Q.' ),write(COM),nl,
+        write('Gasto gasolina ida:'),write('Q.') ,write(PRECIO),nl,nl,fail
+    ).
+
+    doblenv(ND,NH,E,PD,D,PC,P,PRE):- nl,
+    (
+        COM is D*PC,nl,
+        write('-----------------------------------------------------'),nl,
+        TOTAL is PD+COM+P,TOTAL=<PRE,write(' Total: '),write(TOTAL),nl,
+        write('Hotel: '),write(NH),nl,
+        write('Departamento para viaje: '),write(ND),nl,
+        write('Estrellas del hotel: '),write(E),nl,
+        write('Habitacion doble total: Q.'),write(PD),nl,
+        write('Gasto por comida en los '),write(D),write(' dias '),COM is D*PC,write(' es Q.' ),write(COM),nl,
+        write('Gasto pasaje de ida:'),write('Q.'),(write(P)),nl,nl,fail
+    ).
+
+    simplenv(ND,NH,E,PS,D,PC,P,PRE):- nl,
+    (
+        COM is D*PC,nl,
+        write('-----------------------------------------------------'),nl,
+        TOTAL is PS+COM+P,TOTAL=<PRE,write(' Total: '),write(TOTAL),nl,
+        write('Hotel: '),write(NH),nl,
+        write('Departamento para viaje: '),write(ND),nl,
+        write('Estrellas del hotel: '),write(E),nl,
+        write('Habitacion simple total: Q.'),write(PS),nl,
+        write('Gasto por comida en los '),write(D),write(' dias '),write(' es Q.' ),write(COM),nl,
+        write('Gasto pasaje ida:'),write('Q.'),write(P),nl,nl,fail
     ).
 % ****************************************************.
 % *************** MENU REPORTES ***************.
+% ****************************************************.
     reports_menu:- nl,
+    (
         write('Eliga que reporte le gustaria visualizar:'),nl,
-        write('1. reporte_1'),nl,
-        write('2. reporte_2'),nl,
-        write('3. reporte_3'),nl,
-        write('4. reporte_4'),nl,
-        write('5. reporte_5'),nl,
-        write('6. reporte_6'),nl,
-        write('7. reporte_7'),nl,
+        write('1. Nombre de hotel, nombre de cliente y nacionalidad de clientes con opiniones mayor o igual de 5.'),nl,
+        write('2. Nombre de hotel, nombre de cliente y estado civil de clientes con reservaciones en hoteles que se habla katchikel.'),nl,
+        write('3. Nombre de hotel, nombre de cliente y opinion, en hoteles de idioma ingles y opinion mayor o igual que 6.'),nl,
+        write('4. Nombre de hotel, direccion y nombre de administradores con opiniones de 10.'),nl,
+        write('5. Nombre de hotel y direccion de hoteles que recibieron a clientes casados y motivo de viaje por trabajo.'),nl,
+        write('6. Nombre de pais y de hotel de clientes extranjeros hospedados en departamentos de habla ingles.'),nl,
+        write('7. Nombre de hotel, departamento, idioma y nombre de clientes con opiniones mayores o igual que 7 y estadias mayores o igual a 3 dias.'),nl,
         read(REPORTES_OP),nl,
-        analyze_rep_op(REPORTES_OP),
-        nl.
+        analyze_rep_op(REPORTES_OP),nl
+    ).
+
+    analyze_rep_op(OP):- nl,
+    (
+        OP == 1->
+            write('::::::::::::::::::::     Reporte 1   ::::::::::::::::::::\n'),nl,
+            write('\tCliente, nacionalidad y hoteles con opiniones >= 5.\n\n'),
+            write(' ------------------------------------------------------------------------------------------------\n'),
+            write('|    Nombre hotel \t\t|   Nombre cliente \t\t\t|   Nacionalidad \t|\n'),
+            write(' ------------------------------------------------------------------------------------------------\n'),
+            cliente(ID_C,NOMBRE_C,APELLIDO_C,PAIS,_,_,_),
+            hotel(ID_H,NOMBRE_H,_,_,_,_,_,_,_),
+            registro(_,ID_C,ID_H,_,_,OPINION),OPINION>=5,
+            format('|    ~a \t\t\t|   ~a ~a \t\t\t|   ~a \t|',[NOMBRE_H, NOMBRE_C, APELLIDO_C, PAIS]),nl,fail;
+        OP == 2->
+            write('::::::::::::::::::::     Reporte 2   ::::::::::::::::::::\n'),nl,
+            write('\tCliente, estado civil y hoteles donde se habla katchikel.\n\n'),
+            write(' ------------------------------------------------------------------------------------------------\n'),
+            write('|    Nombre hotel\t\t|   Nombre cliente\t\t|   Estado civil\t\t|\n'),
+            write(' ------------------------------------------------------------------------------------------------\n'),
+            cliente(ID_C,NOMBRE_C,APELLIDO_C,_,_,ESTADO_C,_),
+            hotel(ID_H,NOMBRE_H,_,_,_,_,_,ID_D,_),
+            registro(_,ID_C,ID_H,_,_,_),
+            departamento(ID_D,_,_,LENGUAJE,_,_),LENGUAJE=='katchikel',
+            format('|\t~a\t\t|   ~a ~a\t\t|   ~a\t\t|',[NOMBRE_H, NOMBRE_C, APELLIDO_C, ESTADO_C]),nl,fail;
+        OP == 3->
+            write('::::::::::::::::::::     Reporte 3   ::::::::::::::::::::\n'),nl,
+            write('\tCliente, hoteles con opiniones >= 6 e idioma ingles.\n\n'),
+            write(' ------------------------------------------------------------------------------------------------\n'),
+            write('|\tNombre hotel\t\t|   Nombre cliente\t\t|   Opinion\t\t|\n'),
+            write(' ------------------------------------------------------------------------------------------------\n'),
+            cliente(ID_C,NOMBRE_C,APELLIDO_C,_,_,_,_),
+            hotel(ID_H,NOMBRE_H,_,_,_,_,_,ID_D,_),
+            registro(_,ID_C,ID_H,_,_,OPINION),OPINION>=6,
+            departamento(ID_D,_,_,LENGUAJE,_,_),LENGUAJE=='ingles',
+            format('|\t~a\t\t|   ~a ~a\t\t|   ~a\t\t|',[NOMBRE_H, NOMBRE_C, APELLIDO_C, OPINION]),nl,fail;
+        OP == 4->
+            write('::::::::::::::::::::     Reporte 4   ::::::::::::::::::::\n'),nl,
+            write('\tAdministradores y hoteles, con su direccion, con opiniones = 10.\n\n'),
+            write(' --------------------------------------------------------------------------------------------------------\n'),
+            write('|\tNombre hotel\t|\tDireccion\t|\tOpinion\t\t|\t\tNombre administrador\t|\n'),
+            write(' --------------------------------------------------------------------------------------------------------\n'),
+            hotel(ID_H,NOMBRE_H,DIRECCION_H,_,_,_,_,_,_),
+            registro(_,_,ID_H,_,_,OPINION),OPINION=10,
+            trabajador(_,NOMBRE_T,CARGO,ID_H),CARGO=='administrador',
+            format('|\t~a\t|\t~a\t\t|\t~a\t\t|\t\t~a\t\t\t|',[NOMBRE_H, DIRECCION_H, NOMBRE_T, OPINION]),nl,fail;
+        OP == 5->
+            write('::::::::::::::::::::     Reporte 5   ::::::::::::::::::::\n'),nl,
+            write('\tHoteles, con su direccion, que recibieron clientes casados por motivo de trabajo.\n\n'),
+            write(' ------------------------------------------------------------------------------------------------\n'),
+            write('|\tNombre hotel\t\t|\tDireccion hotel\t\t|\tNombre cliente\t\t|\n'),
+            write(' ------------------------------------------------------------------------------------------------\n'),
+            cliente(ID_C,NOMBRE_C,APELLIDO_C,_,_,ESTADO_C,MOTIVO),ESTADO_C=='casado',MOTIVO=='trabajo',
+            hotel(ID_H,NOMBRE_H,DIRECCION_H,_,_,_,_,_,_),
+            registro(_,ID_C,ID_H,_,_,_),
+            format('|\t~a\t\t|\t~a\t\t|\t~a ~a\t\t|',[NOMBRE_H, DIRECCION_H, NOMBRE_C, APELLIDO_C]),nl,fail;
+        OP == 6->
+            write('::::::::::::::::::::     Reporte 6   ::::::::::::::::::::\n'),nl,
+            write('\tHoteles, y su pais, con clientes extranjeros en departamentos de habla inglesa.\n\n'),
+            write(' -----------------------------------------------------------------------------------------------------------------------------------\n'),
+            write('|\tNombre hotel\t\t|\tNombre cliente\t\t|\tLenguaje_local\t\t|\tNacionalidad\t\t|\n'),
+            % write('|\tNombre hotel\t\t|\tNacionalidad\t\t|\n'),
+            write(' -----------------------------------------------------------------------------------------------------------------------------------\n'),
+            cliente(ID_C,NOMBRE_C,APELLIDO_C,PAIS,_,_,_),PAIS\=='guatemala',
+            departamento(ID_D,_,_,LENGUAJE,_,_),LENGUAJE=='ingles',
+            hotel(ID_H,NOMBRE_H,_,_,_,_,_,ID_D,_),
+            registro(_,ID_C,ID_H,_,_,_),
+            format('|\t~a\t\t|\t~a ~a\t\t|\t~a\t\t|\t~a\t\t|',[NOMBRE_H, NOMBRE_C, APELLIDO_C, LENGUAJE, PAIS]),nl,fail;
+            % format('|\t~a\t\t|\t~a\t\t|',[NOMBRE_H, PAIS]),nl,fail;
+        OP == 7->
+            write('::::::::::::::::::::     Reporte 7   ::::::::::::::::::::'),nl,
+            write('\tClientes, idioma, departamento y hoteles con opiniones >= 7 y estadias >= 3 dias.\n'),
+            write(' ------------------------------------------------------------------------------------------------------------------------------------------------------------\n'),
+            write('|\tNombre cliente\t\t|\tNombre hotel\t\t|\tLenguaje_local\t\t|\tNacionalidad\t\t|\tOpinion\t\t|\tEstadia\t\t|\n'),
+            % write('|\tNombre hotel\t\t|\tNacionalidad\t\t|\n'),
+            write(' ------------------------------------------------------------------------------------------------------------------------------------------------------------\n'),
+            departamento(ID_D,NOMBRE_D,_,LENGUAJE,_,_),
+            cliente(ID_C,NOMBRE_C,APELLIDO_C,_,_,_,_),
+            hotel(ID_H,NOMBRE_H,_,_,_,_,_,ID_D,_),
+            registro(_,ID_C,ID_H,_,ESTADIA,OPINION),OPINION>=7,ESTADIA>=3,
+            format('|\t~a ~a\t\t|\t~a\t\t|\t~a\t\t|\t~a\t\t|\t~a\t\t|\t~a\t\t|',[NOMBRE_C, APELLIDO_C, NOMBRE_H, LENGUAJE, NOMBRE_D, OPINION, ESTADIA]),nl,fail
+    ).
