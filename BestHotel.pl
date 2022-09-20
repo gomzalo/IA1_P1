@@ -1,10 +1,9 @@
-% ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::.
-% :::::::::::::::::::::: BASE DE CONOCIMIENTOS ::::::::::::::::::::::.
-% ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::.
-
-% --------------------------------------------.
-% ----------- Hechos departamento -----------.
-% --------------------------------------------.
+% ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::.
+%                               :::::::::::::::::::::: BASE DE CONOCIMIENTOS ::::::::::::::::::::::.
+% ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::.
+    % --------------------------------------------.
+    % ----------- Hechos departamento -----------.
+    % --------------------------------------------.
     departamento(d1, peten, 8, espanol, tropical, 600).
     departamento(d2, izabal, 5, espanol, calor, 200).
     departamento(d3, alta_verapaz, 6, espanol, frio, 300).
@@ -27,11 +26,9 @@
     departamento(d20, solola, 6, ketchi, frio, 200).
     departamento(d21, totonicapan, 5, ingles, templado, 200).
     departamento(d22, sacatepequez, 2, espanol, templado, 100).
-
-% --------------------------------------------.
-% ----------- Hechos hotel -----------.
-% --------------------------------------------.
-
+    % --------------------------------------------.
+    % ----------- Hechos hotel -----------.
+    % --------------------------------------------.
     hotel(h1, camino_real, zona_9, 4, 100, 200, 50, d1, 7).
     hotel(h2, holiday_inn, zona_10, 4, 200, 350, 75, d2, 20).
     hotel(h3, hu_nal_ye, km_260, 1, 50, 100, 60, d2, 260).
@@ -64,11 +61,9 @@
     hotel(h30, las_islas, km_241, 2, 340, 600, 80, d14, 241).
     hotel(h31, usac, zona_12, 3, 100, 50, 7, d4, 10).
     hotel(h33, el_bosque, km_280, 5, 500, 700, 175, d5, 280).
-
-% --------------------------------------------.
-% ----------- Hechos cliente -----------.
-% --------------------------------------------.
-
+    % --------------------------------------------.
+    % ----------- Hechos cliente -----------.
+    % --------------------------------------------.
     cliente(c1, jose, morales, guatemala, 27, soltero, vacaciones).
     cliente(c2, fabrizio, sartini, italia, 25, casado, vacaciones).
     cliente(c3, gustavo, molina, holanda, 15, soltero, trabajo).
@@ -92,11 +87,9 @@
     cliente(c22, montheri, lois, inglaterra, 32, casado, vacaciones).
     cliente(c23, silverio, perez, mexico, 33, casado, paso).
     cliente(c24, monica, suarez, mexico, 30, casado, trabajo).
-
-% --------------------------------------------.
-% ----------- Hechos registro -----------.
-% --------------------------------------------.
-
+    % --------------------------------------------.
+    % ----------- Hechos registro -----------.
+    % --------------------------------------------.
     registro(r1, c10, h30, 10/01/2021, 4, 3).
     registro(r2, c10, h30, 8/04/2022, 2, 5).
     registro(r3, c10, h31, 2/07/2022, 5, 5).
@@ -140,11 +133,9 @@
     registro(r43, c6, h11, 19/ 03/2021, 2, 10).
     registro(r44, c6, h12, 10/06/2022, 4, 6).
     registro(r45, c6, h4, 6/03/2022, 4, 3).
-
-% --------------------------------------------.
-% ----------- Hechos trabajador -----------.
-% --------------------------------------------.
-
+    % --------------------------------------------.
+    % ----------- Hechos trabajador -----------.
+    % --------------------------------------------.
     trabajador(t1, jose_hernandez, chef, h1).
     trabajador(t2, maria_loarca, mesera, h1).
     trabajador(t3, julio_ortega, administrador, h1).
@@ -447,12 +438,12 @@
     trabajador(t300, lorein, oficinista, h31).
     trabajador(t301, yulisa, encargado, h31).
 
-% ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::.
-% :::::::::::::::::::::: MOTOR DE INFERENCIA ::::::::::::::::::::::.
-% ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::.
-% ****************************************************.
-% ********************* BEGIN *********************.
-% ****************************************************.
+% ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::.
+%                               :::::::::::::::::::::: MOTOR DE INFERENCIA ::::::::::::::::::::::.
+% ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::.
+% ********************************************************************************************************.
+%                       ********************* BEGIN *********************.
+% ********************************************************************************************************.
     begin:- write('¡Bienvenido al selector de vacaciones 2022!'),nl,
             write('Seleccione una opcion:'),nl,
             write(''),nl,
@@ -467,9 +458,9 @@
         OP == 2 -> reports_menu;
         write('Opcion no valida'),nl
     ).
-% ****************************************************.
-% *************** MENU SISTEMA EXPERTO ***************.
-% ****************************************************.
+% ********************************************************************************************************.
+%                      *************** MENU SISTEMA EXPERTO ***************.
+% ********************************************************************************************************.
     exp_sys_menu:- nl,
     (
         write('Por favor elija su situacion:'),nl,
@@ -480,7 +471,7 @@
         read(RUTA_OP),nl,
         analyze_route_op(RUTA_OP),nl
     ).
-
+    % ||||||||||||||||||||||||  Analyze menu sistema experto ||||||||||||||||||||||||
     analyze_route_op(OP):-
     (
         OP == 1 -> r_presupuesto;
@@ -498,8 +489,6 @@
         read(PRESUPUESTO),nl,
         write('¿Realizara el viaje en su vehiculo?\ns/n'),nl,
         read(VEHICULO),nl,
-        write('Ingrese el clima deseado:\ntropical\ncalor\nfrio\ntemplado'),nl,
-        read(CLIMA),nl,
         write('Tipo de habitacion deseada:\nsimple\ndoble'),nl,
         read(T_HABITACION),nl,
         write('¿Cuantos dias se estara hospedando?'),nl,
@@ -508,87 +497,364 @@
         read(T_COMIDA),nl,
         write('¿Cuantas personas se hospedaran?'),nl,
         read(PERSONAS),nl,
-        write('Ingrese el numero minimo de estrellas que busca del hotel:'),nl,
-        read(ESTRELLAS),nl,
-        analyze_budget_r(PRESUPUESTO, VEHICULO, CLIMA, T_HABITACION, DIAS, T_COMIDA, PERSONAS, ESTRELLAS),nl
+        write('::::::::::::     RECOMENDACIONES     ::::::::::::\n'),
+        write('Hoteles que se ajustan a su presupuesto de Q. '),write(PRESUPUESTO),write(':\n'),
+        analyze_budget_r(PRESUPUESTO, VEHICULO, T_HABITACION, DIAS, T_COMIDA, PERSONAS),nl
     ).
-
-    analyze_budget_r(PRESUPUESTO, VEHICULO, CLIMA, T_HABITACION, DIAS, T_COMIDA, PERSONAS, ESTRELLAS):- nl,
+    % ||||||||||||||||||||||||  Analyze route ||||||||||||||||||||||||
+    analyze_budget_r(PRESUPUESTO, VEHICULO, T_HABITACION, DIAS, T_COMIDA, PERSONAS):- nl,
     (
-        departamento(ID_D,NOMBRE_D,_,_,CLIMA_D,PASAJE),CLIMA_D==CLIMA,
-        hotel(_,NOMBRE_H,_,ESTRELLAS_H,H_SIMPLE,H_DOBLE,COSTO_COMIDA,ID_D,DISTANCIA),ESTRELLAS_H==ESTRELLAS,
+        departamento(ID_D,NOMBRE_D,_,_,_,PASAJE),
+        hotel(_,NOMBRE_H,_,ESTRELLAS_H,H_SIMPLE,H_DOBLE,COSTO_COMIDA,ID_D,DISTANCIA),
         DIAS_PERSONA is DIAS*PERSONAS,
         PRECIO_SIMPLE is H_SIMPLE*DIAS_PERSONA,
         PRECIO_DOBLE is H_DOBLE*DIAS_PERSONA,
         PRECIO_COMIDA is COSTO_COMIDA*T_COMIDA,
-        write('::::::::::::     RECOMENDACIONES     ::::::::::::'),nl,
         (
-            (T_HABITACION=='simple',VEHICULO=='s')->simplev(NOMBRE_D,NOMBRE_H,ESTRELLAS,PRECIO_SIMPLE,DIAS,PRECIO_COMIDA,DISTANCIA,PRESUPUESTO);
-            (T_HABITACION=='doble',VEHICULO=='s')->doblev(NOMBRE_D,NOMBRE_H,ESTRELLAS,PRECIO_DOBLE,DIAS,PRECIO_COMIDA,DISTANCIA,PRESUPUESTO);
-            (T_HABITACION=='simple',VEHICULO=='n')->simplenv(NOMBRE_D,NOMBRE_H,ESTRELLAS,PRECIO_SIMPLE,DIAS,PRECIO_COMIDA,PASAJE,PRESUPUESTO);
-            (T_HABITACION=='doble',VEHICULO=='n')->doblenv(NOMBRE_D,NOMBRE_H,ESTRELLAS,PRECIO_DOBLE,DIAS,PRECIO_COMIDA,PASAJE,PRESUPUESTO)
+            (T_HABITACION=='simple',VEHICULO=='s')->simplev(NOMBRE_D,NOMBRE_H,ESTRELLAS_H,PRECIO_SIMPLE,DIAS,PRECIO_COMIDA,DISTANCIA,PRESUPUESTO);
+            (T_HABITACION=='doble',VEHICULO=='s')->doblev(NOMBRE_D,NOMBRE_H,ESTRELLAS_H,PRECIO_DOBLE,DIAS,PRECIO_COMIDA,DISTANCIA,PRESUPUESTO);
+            (T_HABITACION=='simple',VEHICULO=='n')->simplenv(NOMBRE_D,NOMBRE_H,ESTRELLAS_H,PRECIO_SIMPLE,DIAS,PRECIO_COMIDA,PASAJE,PRESUPUESTO);
+            (T_HABITACION=='doble',VEHICULO=='n')->doblenv(NOMBRE_D,NOMBRE_H,ESTRELLAS_H,PRECIO_DOBLE,DIAS,PRECIO_COMIDA,PASAJE,PRESUPUESTO)
         ),fail
     ).
-
-
+    % ||||||||||||||||||||||||  Simple con vehiculo ||||||||||||||||||||||||
     doblev(ND,NH,E,PD,D,PC,DH,PRE):- nl,
     (
         GAS is 56/10,nl,
-        PRECIO is DH*GAS,nl,
+        PRECIO_V is DH*GAS,nl,
         COM is D*PC,nl,
         write('-----------------------------------------------------'),nl,
-        TOTAL is PD+PRECIO+COM,TOTAL=<PRE,write(' Total: '),write(TOTAL),nl,
+        TOTAL is PD+PRECIO_V+COM,TOTAL=<PRE,write('\n Total: '),write(TOTAL),nl,
         write('Hotel: '),write(NH),nl,
         write('Departamento para viaje: '),write(ND),nl,
         write('Estrellas del hotel: '),write(E),nl,
         write('Habitacion doble total: Q.'),write(PD),nl,
         write('Gasto por comida en los '),write(D),write(' dias '),COM is D*PC,write(' es Q.' ),write(COM),nl,
-        write('Gasto gasolina ida:'),write('Q.') ,write(PRECIO),nl,nl,fail
+        write('Gasto gasolina ida:'),write('Q.') ,write(PRECIO_V),nl,fail
     ).
-
+    % ||||||||||||||||||||||||  Doble con vehiculo ||||||||||||||||||||||||
     simplev(ND,NH,E,PS,D,PC,DH,PRE):- nl,
     (
         GAS is 56/10,nl,
-        PRECIO is DH*GAS,nl,
+        PRECIO_V is DH*GAS,nl,
         COM is D*PC,nl,
         write('-----------------------------------------------------'),nl,
-        TOTAL is PS+PRECIO+COM,TOTAL=<PRE,write(' Total: '),write(TOTAL),nl,
+        TOTAL is PS+PRECIO_V+COM,TOTAL=<PRE,write('\n Total: '),write(TOTAL),nl,
         write('Hotel: '),write(NH),nl,
         write('Departamento para viaje: '),write(ND),nl,
         write('Estrellas del hotel: '),write(E),nl,
         write('Habitacion simple total: Q.'),write(PS),nl,
         write('Gasto por comida en los '),write(D),write(' dias '),write(' es Q.' ),write(COM),nl,
-        write('Gasto gasolina ida:'),write('Q.') ,write(PRECIO),nl,nl,fail
+        write('Gasto gasolina ida:'),write('Q.') ,write(PRECIO_V),nl,fail
     ).
-
+    % ||||||||||||||||||||||||  Simple sin vehiculo ||||||||||||||||||||||||
     doblenv(ND,NH,E,PD,D,PC,P,PRE):- nl,
     (
         COM is D*PC,nl,
         write('-----------------------------------------------------'),nl,
-        TOTAL is PD+COM+P,TOTAL=<PRE,write(' Total: '),write(TOTAL),nl,
+        TOTAL is PD+COM+P,TOTAL=<PRE,write('\n Total: '),write(TOTAL),nl,
         write('Hotel: '),write(NH),nl,
         write('Departamento para viaje: '),write(ND),nl,
         write('Estrellas del hotel: '),write(E),nl,
         write('Habitacion doble total: Q.'),write(PD),nl,
         write('Gasto por comida en los '),write(D),write(' dias '),COM is D*PC,write(' es Q.' ),write(COM),nl,
-        write('Gasto pasaje de ida:'),write('Q.'),(write(P)),nl,nl,fail
+        write('Gasto pasaje de ida:'),write('Q.'),(write(P)),nl,fail
     ).
-
+    % ||||||||||||||||||||||||  Doble sin vehiculo ||||||||||||||||||||||||
     simplenv(ND,NH,E,PS,D,PC,P,PRE):- nl,
     (
         COM is D*PC,nl,
         write('-----------------------------------------------------'),nl,
-        TOTAL is PS+COM+P,TOTAL=<PRE,write(' Total: '),write(TOTAL),nl,
+        TOTAL is PS+COM+P,TOTAL=<PRE,write('\n Total: '),write(TOTAL),nl,
         write('Hotel: '),write(NH),nl,
         write('Departamento para viaje: '),write(ND),nl,
         write('Estrellas del hotel: '),write(E),nl,
         write('Habitacion simple total: Q.'),write(PS),nl,
         write('Gasto por comida en los '),write(D),write(' dias '),write(' es Q.' ),write(COM),nl,
-        write('Gasto pasaje ida:'),write('Q.'),write(P),nl,nl,fail
+        write('Gasto pasaje ida:'),write('Q.'),write(P),nl,fail
     ).
-% ****************************************************.
-% *************** MENU REPORTES ***************.
-% ****************************************************.
+% ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+% |||||||||||||||||||||||||||||||| Ruta 2 - Idioma |||||||||||||||||||||||||||||||||
+% ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+    r_idioma:- nl,
+    (
+        write('Ingrese el idioma de su preferencia:\ningles\nespanol\nkatchikel\nketchi'),nl,
+        read(IDIOMA),nl,
+        write('¿Realizara el viaje en su vehiculo?\ns/n'),nl,
+        read(VEHICULO),nl,
+        write('Tipo de habitacion deseada:\nsimple\ndoble'),nl,
+        read(T_HABITACION),nl,
+        write('¿Cuantos dias se estara hospedando?'),nl,
+        read(DIAS),nl,
+        write('¿Cuantos tiempos de comida desea? \n0\n1\n2\n3'),nl,
+        read(T_COMIDA),nl,
+        write('¿Cuantas personas se hospedaran?'),nl,
+        read(PERSONAS),nl,
+        write('::::::::::::     RECOMENDACIONES     ::::::::::::\n'),
+        write('Hoteles que se ajustan al idioma '),write(IDIOMA),write(':\n'),
+        analyze_idioma_r(IDIOMA, VEHICULO, T_HABITACION, DIAS, T_COMIDA, PERSONAS),nl
+    ).
+    % ||||||||||||||||||||||||  Analyze route ||||||||||||||||||||||||
+    analyze_idioma_r(IDIOMA, VEHICULO, T_HABITACION, DIAS, T_COMIDA, PERSONAS):- nl,
+    (
+        departamento(ID_D,NOMBRE_D,_,LENGUAJE,_,PASAJE),LENGUAJE==IDIOMA,
+        hotel(_,NOMBRE_H,_,ESTRELLAS_H,H_SIMPLE,H_DOBLE,COSTO_COMIDA,ID_D,DISTANCIA),
+        DIAS_PERSONA is DIAS*PERSONAS,
+        PRECIO_SIMPLE is H_SIMPLE*DIAS_PERSONA,
+        PRECIO_DOBLE is H_DOBLE*DIAS_PERSONA,
+        PRECIO_COMIDA is COSTO_COMIDA*T_COMIDA,
+        (
+            (T_HABITACION=='simple',VEHICULO=='s')->simplevi(NOMBRE_D,NOMBRE_H,ESTRELLAS_H,PRECIO_SIMPLE,DIAS,PRECIO_COMIDA,DISTANCIA);
+            (T_HABITACION=='doble',VEHICULO=='s')->doblevi(NOMBRE_D,NOMBRE_H,ESTRELLAS_H,PRECIO_DOBLE,DIAS,PRECIO_COMIDA,DISTANCIA);
+            (T_HABITACION=='simple',VEHICULO=='n')->simplenvi(NOMBRE_D,NOMBRE_H,ESTRELLAS_H,PRECIO_SIMPLE,DIAS,PRECIO_COMIDA,PASAJE);
+            (T_HABITACION=='doble',VEHICULO=='n')->doblenvi(NOMBRE_D,NOMBRE_H,ESTRELLAS_H,PRECIO_DOBLE,DIAS,PRECIO_COMIDA,PASAJE)
+        ),fail
+    ).
+    % ||||||||||||||||||||||||  Simple con vehiculo ||||||||||||||||||||||||
+    doblevi(ND,NH,E,PD,D,PC,DH):- nl,
+    (
+        GAS is 56/10,nl,
+        PRECIO_V is DH*GAS,nl,
+        COM is D*PC,nl,
+        write('-----------------------------------------------------'),nl,
+        TOTAL is PD+PRECIO_V+COM,write('\n Total: '),write(TOTAL),nl,
+        write('Hotel: '),write(NH),nl,
+        write('Departamento para viaje: '),write(ND),nl,
+        write('Estrellas del hotel: '),write(E),nl,
+        write('Habitacion doble total: Q.'),write(PD),nl,
+        write('Gasto por comida en los '),write(D),write(' dias '),COM is D*PC,write(' es Q.' ),write(COM),nl,
+        write('Gasto gasolina ida:'),write('Q.') ,write(PRECIO_V),nl,fail
+    ).
+    % ||||||||||||||||||||||||  Doble con vehiculo ||||||||||||||||||||||||
+    simplevi(ND,NH,E,PS,D,PC,DH):- nl,
+    (
+        GAS is 56/10,nl,
+        PRECIO_V is DH*GAS,nl,
+        COM is D*PC,nl,
+        write('-----------------------------------------------------'),nl,
+        TOTAL is PS+PRECIO_V+COM,write('\n Total: '),write(TOTAL),nl,
+        write('Hotel: '),write(NH),nl,
+        write('Departamento para viaje: '),write(ND),nl,
+        write('Estrellas del hotel: '),write(E),nl,
+        write('Habitacion simple total: Q.'),write(PS),nl,
+        write('Gasto por comida en los '),write(D),write(' dias '),write(' es Q.' ),write(COM),nl,
+        write('Gasto gasolina ida:'),write('Q.') ,write(PRECIO_V),nl,fail
+    ).
+    % ||||||||||||||||||||||||  Simple sin vehiculo ||||||||||||||||||||||||
+    doblenvi(ND,NH,E,PD,D,PC,P):- nl,
+    (
+        COM is D*PC,nl,
+        write('-----------------------------------------------------'),nl,
+        TOTAL is PD+COM+P,write('\n Total: '),write(TOTAL),nl,
+        write('Hotel: '),write(NH),nl,
+        write('Departamento para viaje: '),write(ND),nl,
+        write('Estrellas del hotel: '),write(E),nl,
+        write('Habitacion doble total: Q.'),write(PD),nl,
+        write('Gasto por comida en los '),write(D),write(' dias '),COM is D*PC,write(' es Q.' ),write(COM),nl,
+        write('Gasto pasaje de ida:'),write('Q.'),(write(P)),nl,fail
+    ).
+    % ||||||||||||||||||||||||  Doble sin vehiculo ||||||||||||||||||||||||
+    simplenvi(ND,NH,E,PS,D,PC,P):- nl,
+    (
+        COM is D*PC,nl,
+        write('-----------------------------------------------------'),nl,
+        TOTAL is PS+COM+P,write('\n Total: '),write(TOTAL),nl,
+        write('Hotel: '),write(NH),nl,
+        write('Departamento para viaje: '),write(ND),nl,
+        write('Estrellas del hotel: '),write(E),nl,
+        write('Habitacion simple total: Q.'),write(PS),nl,
+        write('Gasto por comida en los '),write(D),write(' dias '),write(' es Q.' ),write(COM),nl,
+        write('Gasto pasaje ida:'),write('Q.'),write(P),nl,fail
+    ).
+% ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+% |||||||||||||||||||||||||||||||| Ruta 3 - Calidad ||||||||||||||||||||||||||||||||
+% ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+    r_calidad:- nl,
+    (
+        write('Ingrese el numero minimo de estrellas que busca del hotel:'),nl,
+        read(ESTRELLAS),nl,
+        write('¿Realizara el viaje en su vehiculo?\ns/n'),nl,
+        read(VEHICULO),nl,
+        write('Tipo de habitacion deseada:\nsimple\ndoble'),nl,
+        read(T_HABITACION),nl,
+        write('¿Cuantos dias se estara hospedando?'),nl,
+        read(DIAS),nl,
+        write('¿Cuantos tiempos de comida desea? \n0\n1\n2\n3'),nl,
+        read(T_COMIDA),nl,
+        write('¿Cuantas personas se hospedaran?'),nl,
+        read(PERSONAS),nl,
+        write('::::::::::::     RECOMENDACIONES     ::::::::::::\n'),
+        write('Hoteles que se ajustan a la calidad de '),write(ESTRELLAS),write(' estrellas:\n'),
+        analyze_calidad_r(ESTRELLAS, VEHICULO, T_HABITACION, DIAS, T_COMIDA, PERSONAS),nl
+    ).
+    % ||||||||||||||||||||||||  Analyze route ||||||||||||||||||||||||
+    analyze_calidad_r(ESTRELLAS, VEHICULO, T_HABITACION, DIAS, T_COMIDA, PERSONAS):- nl,
+    (
+        departamento(ID_D,NOMBRE_D,_,_,_,PASAJE),
+        hotel(_,NOMBRE_H,_,ESTRELLAS_H,H_SIMPLE,H_DOBLE,COSTO_COMIDA,ID_D,DISTANCIA),ESTRELLAS_H>=ESTRELLAS,
+        DIAS_PERSONA is DIAS*PERSONAS,
+        PRECIO_SIMPLE is H_SIMPLE*DIAS_PERSONA,
+        PRECIO_DOBLE is H_DOBLE*DIAS_PERSONA,
+        PRECIO_COMIDA is COSTO_COMIDA*T_COMIDA,
+        (
+            (T_HABITACION=='simple',VEHICULO=='s')->simplevc(NOMBRE_D,NOMBRE_H,ESTRELLAS_H,PRECIO_SIMPLE,DIAS,PRECIO_COMIDA,DISTANCIA);
+            (T_HABITACION=='doble',VEHICULO=='s')->doblevc(NOMBRE_D,NOMBRE_H,ESTRELLAS_H,PRECIO_DOBLE,DIAS,PRECIO_COMIDA,DISTANCIA);
+            (T_HABITACION=='simple',VEHICULO=='n')->simplenvc(NOMBRE_D,NOMBRE_H,ESTRELLAS_H,PRECIO_SIMPLE,DIAS,PRECIO_COMIDA,PASAJE);
+            (T_HABITACION=='doble',VEHICULO=='n')->doblenvc(NOMBRE_D,NOMBRE_H,ESTRELLAS_H,PRECIO_DOBLE,DIAS,PRECIO_COMIDA,PASAJE)
+        ),fail
+    ).
+    % ||||||||||||||||||||||||  Simple con vehiculo ||||||||||||||||||||||||
+    doblevc(ND,NH,E,PD,D,PC,DH):- nl,
+    (
+        GAS is 56/10,nl,
+        PRECIO_V is DH*GAS,nl,
+        COM is D*PC,nl,
+        write('-----------------------------------------------------'),nl,
+        TOTAL is PD+PRECIO_V+COM,write('\n Total: '),write(TOTAL),nl,
+        write('Hotel: '),write(NH),nl,
+        write('Departamento para viaje: '),write(ND),nl,
+        write('Estrellas del hotel: '),write(E),nl,
+        write('Habitacion doble total: Q.'),write(PD),nl,
+        write('Gasto por comida en los '),write(D),write(' dias '),COM is D*PC,write(' es Q.' ),write(COM),nl,
+        write('Gasto gasolina ida:'),write('Q.') ,write(PRECIO_V),nl,fail
+    ).
+    % ||||||||||||||||||||||||  Doble con vehiculo ||||||||||||||||||||||||
+    simplevc(ND,NH,E,PS,D,PC,DH):- nl,
+    (
+        GAS is 56/10,nl,
+        PRECIO_V is DH*GAS,nl,
+        COM is D*PC,nl,
+        write('-----------------------------------------------------'),nl,
+        TOTAL is PS+PRECIO_V+COM,write('\n Total: '),write(TOTAL),nl,
+        write('Hotel: '),write(NH),nl,
+        write('Departamento para viaje: '),write(ND),nl,
+        write('Estrellas del hotel: '),write(E),nl,
+        write('Habitacion simple total: Q.'),write(PS),nl,
+        write('Gasto por comida en los '),write(D),write(' dias '),write(' es Q.' ),write(COM),nl,
+        write('Gasto gasolina ida:'),write('Q.') ,write(PRECIO_V),nl,fail
+    ).
+    % ||||||||||||||||||||||||  Simple sin vehiculo ||||||||||||||||||||||||
+    doblenvc(ND,NH,E,PD,D,PC,P):- nl,
+    (
+        COM is D*PC,nl,
+        write('-----------------------------------------------------'),nl,
+        TOTAL is PD+COM+P,write('\n Total: '),write(TOTAL),nl,
+        write('Hotel: '),write(NH),nl,
+        write('Departamento para viaje: '),write(ND),nl,
+        write('Estrellas del hotel: '),write(E),nl,
+        write('Habitacion doble total: Q.'),write(PD),nl,
+        write('Gasto por comida en los '),write(D),write(' dias '),COM is D*PC,write(' es Q.' ),write(COM),nl,
+        write('Gasto pasaje de ida:'),write('Q.'),(write(P)),nl,fail
+    ).
+    % ||||||||||||||||||||||||  Doble sin vehiculo ||||||||||||||||||||||||
+    simplenvc(ND,NH,E,PS,D,PC,P):- nl,
+    (
+        COM is D*PC,nl,
+        write('-----------------------------------------------------'),nl,
+        TOTAL is PS+COM+P,write('\n Total: '),write(TOTAL),nl,
+        write('Hotel: '),write(NH),nl,
+        write('Departamento para viaje: '),write(ND),nl,
+        write('Estrellas del hotel: '),write(E),nl,
+        write('Habitacion simple total: Q.'),write(PS),nl,
+        write('Gasto por comida en los '),write(D),write(' dias '),write(' es Q.' ),write(COM),nl,
+        write('Gasto pasaje ida:'),write('Q.'),write(P),nl,fail
+    ).
+% ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+% |||||||||||||||||||||||||||||||| Ruta 4 - Clima ||||||||||||||||||||||||||||||||||
+% ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+    r_clima:- nl,
+    (
+        write('Ingrese el clima deseado:\ntropical\ncalor\nfrio\ntemplado'),nl,
+        read(CLIMA),nl,
+        write('¿Realizara el viaje en su vehiculo?\ns/n'),nl,
+        read(VEHICULO),nl,
+        write('Tipo de habitacion deseada:\nsimple\ndoble'),nl,
+        read(T_HABITACION),nl,
+        write('¿Cuantos dias se estara hospedando?'),nl,
+        read(DIAS),nl,
+        write('¿Cuantos tiempos de comida desea? \n0\n1\n2\n3'),nl,
+        read(T_COMIDA),nl,
+        write('¿Cuantas personas se hospedaran?'),nl,
+        read(PERSONAS),nl,
+        write('::::::::::::     RECOMENDACIONES     ::::::::::::\n'),
+        write('Hoteles que se ajustan al clima '),write(CLIMA),write(':\n'),
+        analyze_clima_r(CLIMA, VEHICULO, T_HABITACION, DIAS, T_COMIDA, PERSONAS),nl
+    ).
+    % ||||||||||||||||||||||||  Analyze route ||||||||||||||||||||||||
+    analyze_clima_r(CLIMA, VEHICULO, T_HABITACION, DIAS, T_COMIDA, PERSONAS):- nl,
+    (
+        departamento(ID_D,NOMBRE_D,_,_,CLIMA_D,PASAJE),CLIMA_D==CLIMA,
+        hotel(_,NOMBRE_H,_,ESTRELLAS_H,H_SIMPLE,H_DOBLE,COSTO_COMIDA,ID_D,DISTANCIA),
+        DIAS_PERSONA is DIAS*PERSONAS,
+        PRECIO_SIMPLE is H_SIMPLE*DIAS_PERSONA,
+        PRECIO_DOBLE is H_DOBLE*DIAS_PERSONA,
+        PRECIO_COMIDA is COSTO_COMIDA*T_COMIDA,
+        (
+            (T_HABITACION=='simple',VEHICULO=='s')->simplevcl(NOMBRE_D,NOMBRE_H,ESTRELLAS_H,PRECIO_SIMPLE,DIAS,PRECIO_COMIDA,DISTANCIA);
+            (T_HABITACION=='doble',VEHICULO=='s')->doblevcl(NOMBRE_D,NOMBRE_H,ESTRELLAS_H,PRECIO_DOBLE,DIAS,PRECIO_COMIDA,DISTANCIA);
+            (T_HABITACION=='simple',VEHICULO=='n')->simplenvcl(NOMBRE_D,NOMBRE_H,ESTRELLAS_H,PRECIO_SIMPLE,DIAS,PRECIO_COMIDA,PASAJE);
+            (T_HABITACION=='doble',VEHICULO=='n')->doblenvcl(NOMBRE_D,NOMBRE_H,ESTRELLAS_H,PRECIO_DOBLE,DIAS,PRECIO_COMIDA,PASAJE)
+        ),fail
+    ).
+    % ||||||||||||||||||||||||  Simple con vehiculo ||||||||||||||||||||||||
+    doblevcl(ND,NH,E,PD,D,PC,DH):- nl,
+    (
+        GAS is 56/10,nl,
+        PRECIO_V is DH*GAS,nl,
+        COM is D*PC,nl,
+        write('-----------------------------------------------------'),nl,
+        TOTAL is PD+PRECIO_V+COM,write('\n Total: '),write(TOTAL),nl,
+        write('Hotel: '),write(NH),nl,
+        write('Departamento para viaje: '),write(ND),nl,
+        write('Estrellas del hotel: '),write(E),nl,
+        write('Habitacion doble total: Q.'),write(PD),nl,
+        write('Gasto por comida en los '),write(D),write(' dias '),COM is D*PC,write(' es Q.' ),write(COM),nl,
+        write('Gasto gasolina ida:'),write('Q.') ,write(PRECIO_V),nl,fail
+    ).
+    % ||||||||||||||||||||||||  Doble con vehiculo ||||||||||||||||||||||||
+    simplevcl(ND,NH,E,PS,D,PC,DH):- nl,
+    (
+        GAS is 56/10,nl,
+        PRECIO_V is DH*GAS,nl,
+        COM is D*PC,nl,
+        write('-----------------------------------------------------'),nl,
+        TOTAL is PS+PRECIO_V+COM,write('\n Total: '),write(TOTAL),nl,
+        write('Hotel: '),write(NH),nl,
+        write('Departamento para viaje: '),write(ND),nl,
+        write('Estrellas del hotel: '),write(E),nl,
+        write('Habitacion simple total: Q.'),write(PS),nl,
+        write('Gasto por comida en los '),write(D),write(' dias '),write(' es Q.' ),write(COM),nl,
+        write('Gasto gasolina ida:'),write('Q.') ,write(PRECIO_V),nl,fail
+    ).
+    % ||||||||||||||||||||||||  Simple sin vehiculo ||||||||||||||||||||||||
+    doblenvcl(ND,NH,E,PD,D,PC,P):- nl,
+    (
+        COM is D*PC,nl,
+        write('-----------------------------------------------------'),nl,
+        TOTAL is PD+COM+P,write('\n Total: '),write(TOTAL),nl,
+        write('Hotel: '),write(NH),nl,
+        write('Departamento para viaje: '),write(ND),nl,
+        write('Estrellas del hotel: '),write(E),nl,
+        write('Habitacion doble total: Q.'),write(PD),nl,
+        write('Gasto por comida en los '),write(D),write(' dias '),COM is D*PC,write(' es Q.' ),write(COM),nl,
+        write('Gasto pasaje de ida:'),write('Q.'),(write(P)),nl,fail
+    ).
+    % ||||||||||||||||||||||||  Doble sin vehiculo ||||||||||||||||||||||||
+    simplenvcl(ND,NH,E,PS,D,PC,P):- nl,
+    (
+        COM is D*PC,nl,
+        write('-----------------------------------------------------'),nl,
+        TOTAL is PS+COM+P,write('\n Total: '),write(TOTAL),nl,
+        write('Hotel: '),write(NH),nl,
+        write('Departamento para viaje: '),write(ND),nl,
+        write('Estrellas del hotel: '),write(E),nl,
+        write('Habitacion simple total: Q.'),write(PS),nl,
+        write('Gasto por comida en los '),write(D),write(' dias '),write(' es Q.' ),write(COM),nl,
+        write('Gasto pasaje ida:'),write('Q.'),write(P),nl,fail
+    ).
+% ********************************************************************************************************.
+%                           *************** MENU REPORTES ***************.
+% ********************************************************************************************************.
     reports_menu:- nl,
     (
         write('Eliga que reporte le gustaria visualizar:'),nl,
@@ -602,7 +868,7 @@
         read(REPORTES_OP),nl,
         analyze_rep_op(REPORTES_OP),nl
     ).
-
+    % ||||||||||||||||||||||||  Analyze reports ||||||||||||||||||||||||
     analyze_rep_op(OP):- nl,
     (
         OP == 1->
